@@ -7,6 +7,7 @@
     care: {title:'Chăm chút bộ lông, thêm một chút gần nhau.',category:'CHĂM SÓC',image:'journal-dog-care.svg',content:'<p>Chải lông không cần là một nhiệm vụ vội vã. Chọn thời điểm bé đang thư giãn, để bé làm quen với dụng cụ rồi bắt đầu bằng những lần chạm thật nhẹ.</p><h3>Chọn dụng cụ phù hợp</h3><p>Lông ngắn, dài và xoăn cần cách chăm sóc khác nhau. Chọn lược theo loại lông, tránh kéo mạnh vùng rối và ngừng lại nếu bé khó chịu. Có thể chia thành nhiều lần ngắn thay vì cố làm xong trong một lần.</p><h3>Nhẹ nhàng cũng là một cách yêu</h3><p>Dùng sản phẩm vệ sinh được ghi rõ dành cho thú cưng, đọc hướng dẫn trước khi dùng. Lau khô vùng ẩm và kiểm tra da khi chải. Nếu thấy mẩn đỏ, rụng lông bất thường hoặc ngứa kéo dài, hãy liên hệ bác sĩ thú y.</p><p class="notice">Nội dung chăm sóc chung và ảnh đều là minh họa. Không đưa ra chẩn đoán hoặc cam kết điều trị.</p>',link:'products.html?category=care',cta:'Ghé góc vệ sinh & chăm sóc'},
     home: {title:'Một góc nhỏ bình yên, một giấc ngủ thật ngoan.',category:'CUỘC SỐNG CÙNG BÉ',image:'journal-home.svg',content:'<p>Chiếc giường tốt không nhất thiết phải lớn nhất. Nó cần đủ chỗ để bé duỗi người, có bề mặt thoải mái và được đặt ở nơi bé thật sự cảm thấy an toàn.</p><h3>Để bé tự chọn nhịp nghỉ</h3><p>Quan sát những nơi bé thích nằm: cạnh cửa sổ, góc phòng yên tĩnh hay sát chỗ bạn thường ngồi. Đặt chỗ ngủ ở vị trí tương tự, tránh lối đi đông và gió thổi trực tiếp.</p><h3>Một thói quen sạch sẽ</h3><p>Giặt vỏ hoặc vệ sinh theo hướng dẫn vật liệu, phơi khô trước khi cho bé dùng lại. Một món đồ quen có mùi dễ chịu giúp chỗ nghỉ mới bớt lạ lẫm.</p><p class="notice">Bài viết và sản phẩm được dùng để minh họa. Tham khảo nhu cầu thực tế của từng bé và hướng dẫn chăm sóc phù hợp.</p>',link:'products.html?category=beds',cta:'Tìm một góc ngủ êm cho bé'}
   };
+  P.articles = articleCopy;
   P.renderShell();
   P.initProducts();
   if (document.body.dataset.page === 'home') {
@@ -35,12 +36,11 @@
   }
   P.initCart();
   P.initUI();
+  P.initSchool();
   document.querySelectorAll('[data-icon]').forEach(node=>{node.innerHTML=P.icon(node.dataset.icon);});
   document.addEventListener('click',event=>{
-    const button=event.target.closest('[data-article]'); if(!button)return;
-    const article=articleCopy[button.dataset.article]; if(!article)return;
-    document.getElementById('info-content').innerHTML=`<p class="eyebrow">PAWS JOURNAL · ${article.category}</p><h2 id="info-title">${article.title}</h2><img class="article-cover" src="assets/images/${article.image}" alt="Minh họa bài viết ${article.title}" width="720" height="480">${article.content}<a class="button button-primary" href="${article.link}">${article.cta} ↗</a>`;
-    P.openDialog(document.getElementById('info-modal'));
+    const button=event.target.closest('[data-article]');
+    if(button && P.articles[button.dataset.article]) window.location.href='article.html?id='+encodeURIComponent(button.dataset.article);
   });
   // Handle images that failed before the global capture listener was registered.
   document.querySelectorAll('img').forEach(image=>{if(image.complete&&image.naturalWidth===0&&!image.dataset.fallback){image.dataset.fallback='true';image.src='assets/images/fallback.svg';}});

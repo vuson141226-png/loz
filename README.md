@@ -1,12 +1,15 @@
-# PAWS & CO. — Pet Shop Demo
+# sisimimi — Website thú cưng theo đề Thiết kế Web
 
-Website bán đồ thú cưng bằng **HTML, CSS và Vanilla JavaScript**, với 24 sản phẩm, bộ lọc, yêu thích, giỏ hàng và checkout mô phỏng.
+Frontend HTML/CSS/JavaScript thuần, **14 trang**, đủ 10 loại trang trong đề; logo SVG, 24 sản phẩm, giỏ/checkout, tin tức, liên hệ, FAQ, đăng nhập/đăng ký và tuyển dụng mô phỏng.
 
-**Chạy:** mở [pet-shop/index.html](pet-shop/index.html) hoặc dùng Live Server trong thư mục `pet-shop`. Không cần npm hoặc build.
+- **[Tải toàn bộ sisimimi.zip](sisimimi.zip)**
+- [Mở mã nguồn trang chủ](pet-shop/index.html) — mở bằng trình duyệt hoặc Live Server, không cần npm/build.
+- [Hướng dẫn và cấu trúc source](pet-shop/README.md)
+- [Bảng đối chiếu đề bài](pet-shop/docs/DOI_CHIEU_DE_BAI.md)
+- [Báo cáo PowerPoint](pet-shop/docs/BAO_CAO_SISIMIMI.pptx)
+- [Kết quả kiểm tra và giới hạn](pet-shop/VALIDATION.md)
 
-- **[Tải PAWS & CO. — pet-shop.zip](pet-shop.zip)**
-- [Hướng dẫn, kiến trúc và phạm vi demo](pet-shop/README.md)
-- [Kết quả kiểm tra](pet-shop/VALIDATION.md)
+Phần thông tin nhóm/bảng phân công Excel được bỏ theo yêu cầu. Thông tin cửa hàng và mọi giao dịch đều là minh họa, không có backend.
 
 ---
 

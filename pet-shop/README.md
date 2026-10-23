@@ -1,92 +1,76 @@
-# PAWS & CO.
+# sisimimi — Website thú cưng
 
-**Yêu thương trong từng điều nhỏ.** Website thương mại điện tử thú cưng dạng frontend demo, viết hoàn toàn bằng HTML5, CSS3 và Vanilla JavaScript. Không có framework, npm, Node.js, backend, database hoặc bước build.
+**Yêu thương trong từng điều nhỏ.** Website bài tập frontend bằng HTML5, CSS3 và JavaScript thuần. Có **14 trang**, đủ **10 loại trang bắt buộc** trong đề. Không framework, backend, Node.js, database hoặc build.
 
-## Chạy dự án
+## Chạy website
 
-Mở **`index.html`** bằng trình duyệt, hoặc mở thư mục `pet-shop` trong VS Code và dùng **Live Server**. Nên dùng cùng địa chỉ và cổng trong quá trình thử để giỏ hàng và yêu thích giữ chung một origin.
+1. Giải nén `sisimimi.zip`.
+2. Mở `index.html`, hoặc mở thư mục trong VS Code rồi chạy bằng **Live Server**.
+3. Dùng cùng địa chỉ/cổng khi thử để giỏ hàng và yêu thích giữ chung localStorage.
 
-Nếu máy có Python, có thể phục vụ tệp tĩnh bằng lệnh sau từ thư mục `pet-shop`:
+Mọi ảnh, font, dữ liệu và code đều nằm cục bộ. Riêng Google Maps cần Internet; nhấn **Tải bản đồ Google** ở trang Liên hệ. Live Server được khuyến nghị vì quy tắc localStorage trên đường dẫn `file:` khác nhau giữa trình duyệt.
 
-```sh
-python3 -m http.server 8010
-```
+Nếu muốn phục vụ tệp bằng Python, chạy `python3 -m http.server 8011` trong thư mục chứa `index.html`. Đây chỉ là công cụ phục vụ tệp tùy chọn, không phải backend hay phụ thuộc của website.
 
-Python chỉ là lựa chọn thay thế Live Server, không phải phụ thuộc hay backend của website. Không cần cài package. Tất cả ảnh, font và dữ liệu đều nằm cục bộ; không cần Internet để mua sắm demo.
+## Các trang theo đề
 
-## Sitemap và luồng chính
+| STT đề | Trang | File |
+| --- | --- | --- |
+| 1 | Trang chủ, logo SVG | `index.html` |
+| 2 | Giới thiệu: lịch sử, sứ mệnh, giá trị, đội ngũ | `about.html` |
+| 3 | Danh sách sản phẩm, ảnh, mô tả, giá, bộ lọc | `products.html` |
+| 4 | Chi tiết, gallery, thông số, đánh giá, thêm giỏ | `product.html?id=daily-dog-chicken` |
+| 5 | Tin tức: ảnh, ngày, tóm tắt, liên kết bài viết | `blog.html` |
+| 6 | Liên hệ: form, email, số điện thoại, địa chỉ, Google Maps | `contact.html` |
+| 7 | FAQ: 10 câu hỏi, tìm kiếm và mở/đóng | `faq.html` |
+| 8 | Đăng nhập/Đăng ký mô phỏng | `login.html` |
+| 9 | Giỏ: sửa số lượng, xóa, tổng tiền, checkout | `cart.html` |
+| 10 | Tuyển dụng: 3 vị trí, yêu cầu, quyền lợi, form ứng tuyển | `careers.html` |
 
-`index.html` → `products.html` → `product.html?id=daily-dog-chicken` → cart drawer / `cart.html` → `checkout.html` → `success.html?id=...`
+Trang bổ sung: `article.html?id=nutrition` (bài viết), `wishlist.html`, `checkout.html`, `success.html`.
 
-- `wishlist.html`: danh sách đã lưu trên trình duyệt.
-- `about.html`: câu chuyện thương hiệu, FAQ, hướng dẫn giao hàng và liên hệ mẫu.
-- Trang chủ: danh mục, bán chạy, ưu đãi, mới về, câu chuyện, đánh giá, 3 bài viết đọc trong dialog, newsletter demo.
-- Danh sách: tìm kiếm tên/mô tả/thương hiệu, lọc thú cưng/danh mục/thương hiệu/giá/đánh giá/ưu đãi/mới, 5 kiểu sắp xếp, grid/list, xem thêm, xóa lọc và trạng thái trống.
-- Chi tiết: 3 hình minh họa, 2 biến thể, giá riêng, tồn kho riêng, số lượng, tabs, liên quan, yêu thích, mua ngay.
-- Checkout: kiểm tra biểu mẫu, giao hàng tiêu chuẩn/nhanh, thanh toán minh họa, xác nhận hiểu quy trình demo, mã đơn cục bộ.
+## Tương tác chính
 
-## Kiến trúc
+- 24 sản phẩm, 6 danh mục, 48 biến thể với giá và tồn kho riêng; 3 ảnh cho mỗi món.
+- Tìm kiếm, lọc kết hợp, sắp xếp, grid/list, xem thêm, quick view, yêu thích.
+- Gallery, tabs mô tả/thông số/đánh giá, số lượng, mua ngay và kiểm tra tồn kho.
+- Cart drawer và giỏ đầy đủ; lưu/đồng bộ giỏ và yêu thích giữa các tab cùng origin.
+- Checkout kiểm tra biểu mẫu, phí giao hàng và tạo mã đơn `SISIMIMI-...` trên trình duyệt.
+- Các form liên hệ, đăng nhập, đăng ký, ứng tuyển, newsletter đều có thông báo sai/đúng và trạng thái đang xử lý.
+- Header sticky, mega menu, menu mobile, Escape và focus cho dialog, nút về đầu trang, reduced motion.
 
-```text
-pet-shop/
-  index.html                 Trang chủ
-  products.html              Danh sách
-  product.html               Chi tiết qua query id
-  wishlist.html              Yêu thích
-  cart.html                  Giỏ hàng
-  checkout.html              Biểu mẫu mô phỏng
-  success.html               Kết quả và mã đơn demo
-  about.html                 Giới thiệu và FAQ
-  css/
-    variables.css            Màu sắc, spacing, font, tokens
-    base.css                 Reset, typography, accessibility
-    layout.css               Header, homepage, footer, layouts
-    components.css           Cards, forms, catalog, dialogs, checkout
-    responsive.css           480 / 768 / 1024 / 1440 px, reduced motion
-  js/
-    data.js                  24 sản phẩm, 6 danh mục, 48 biến thể
-    storage.js               Dữ liệu trình duyệt, validate, tính tiền/tồn kho
-    products.js              Card, lọc, gallery, chi tiết, wishlist
-    cart.js                  Drawer, giỏ, checkout, kết quả
-    ui.js                    Shell, search, menu, dialog, toast
-    main.js                  Khởi tạo và nội dung trang
-  assets/
-    fonts/                   Outfit + Inter và giấy phép SIL OFL
-    icons/paw.svg            Favicon
-    images/                  Hero, 72 SVG sản phẩm, 3 ảnh bài viết, fallback
-```
+## Cấu trúc mã nguồn
 
-Các script classic `defer` dùng namespace `window.Paws`, không dùng ES modules hoặc fetch dữ liệu bắt buộc, nên tránh yêu cầu máy chủ khi mở file. HTML dùng semantic landmarks; nội dung danh mục/giỏ render từ dữ liệu tập trung.
+- `css/style.css`: **một external stylesheet dùng chung** cho mọi trang, chia phần bằng chú thích. Bao gồm CSS variables, Flexbox, Grid và breakpoint 480/768/1024/1440 px.
+- `js/data.js`: dữ liệu sản phẩm, danh mục và đường dẫn ảnh.
+- `js/storage.js`: kiểm tra localStorage, tính tiền, giới hạn tồn kho, lưu giỏ/yêu thích/tóm tắt đơn.
+- `js/products.js`: card, danh sách, bộ lọc, chi tiết và wishlist.
+- `js/cart.js`: drawer, giỏ, checkout và kết quả mô phỏng.
+- `js/ui.js`: logo, header/footer chung, menu, search, dialog và toast.
+- `js/school.js`: tin tức, bài viết, FAQ và các form theo đề.
+- `js/main.js`: khởi tạo và tương tác trang chủ.
+- `assets/icons/logo.svg`: logo sisimimi; `assets/images/`: ảnh cún và SVG minh họa cục bộ.
+- `docs/DOI_CHIEU_DE_BAI.md`: bảng đối chiếu chi tiết.
+- `docs/BAO_CAO_SISIMIMI.pptx`: bản báo cáo giới thiệu website và công nghệ.
 
-## Design system
+Dùng script classic với `defer` và namespace `window.Paws` để chạy khi mở file, không cần fetch hoặc ES module. `Paws` là tên kỹ thuật nội bộ được giữ để tương thích dữ liệu giỏ cũ; thương hiệu hiển thị là **sisimimi**.
 
-- Forest green `#264C40`, warm apricot `#E6A56A`, warm ivory `#F9F7F2`.
-- Heading Outfit, body Inter, font cục bộ với `font-display: swap`.
-- Spacing nhất quán, bo góc mềm, Flexbox/Grid, breakpoint 480/768/1024/1440 px.
-- Focus rõ, nhãn icon, skip link, native dialog có Escape/focus return, native FAQ, tabs bàn phím, giảm chuyển động theo `prefers-reduced-motion`.
+## Dữ liệu minh họa và quyền riêng tư
 
-## Lưu trữ và an toàn dữ liệu
+Không có tài khoản, đơn hàng, thanh toán, email hoặc hồ sơ ứng tuyển thật được tạo/gửi. Không nhập mật khẩu thật hoặc dữ liệu cá nhân nhạy cảm. Form không lưu tên, email, điện thoại, địa chỉ, CV hoặc mật khẩu.
 
-`paws-cart-v1` chỉ lưu ID sản phẩm, ID biến thể và số lượng. Giá luôn lấy lại từ catalog. Dữ liệu được kiểm tra kiểu, loại bỏ ID không có, gộp dòng trùng và giới hạn tồn kho.
+localStorage chỉ giữ ID/biến thể/số lượng trong giỏ, ID yêu thích và bản tóm tắt đơn gần nhất. Giá được lấy lại từ catalog. Dữ liệu hỏng được kiểm tra trước khi dùng. Nếu lưu trữ bị chặn, website báo rõ và ngăn thông báo checkout thành công sai.
 
-`paws-wishlist-v1` lưu danh sách ID hợp lệ. Giỏ và yêu thích đồng bộ qua sự kiện `storage` giữa các tab cùng origin.
+Thương hiệu, sản phẩm, review, đội ngũ, lịch sử công ty, tin tuyển dụng, địa chỉ và số điện thoại đều là minh họa. Đội ngũ thương hiệu trên trang Giới thiệu không phải thành viên nhóm làm bài. Bản đồ dùng Công viên Tao Đàn làm địa điểm công cộng minh họa, không gắn nhãn shop thật.
 
-`paws-order-v1` lưu **bản tóm tắt đơn demo gần nhất**: mã đơn, sản phẩm, số lượng và tổng tiền. **Không lưu tên, địa chỉ, email, điện thoại, mật khẩu hoặc thông tin thẻ.** Không gửi biểu mẫu hoặc dữ liệu sang máy chủ. Newsletter không lưu địa chỉ email.
+Giao tiêu chuẩn demo 30.000 ₫, miễn phí từ 599.000 ₫; giao nhanh 50.000 ₫. Không có dịch vụ vận chuyển kết nối.
 
-Nếu trình duyệt chặn localStorage, website thông báo; giỏ chỉ tồn tại trong trang hiện tại. Checkout ngăn chuyển sang trang thành công nếu không thể lưu kết quả để tránh thông báo sai. Tùy trình duyệt, lưu trữ trên `file:` có thể khác nhau giữa các trang; dùng Live Server để bảo đảm giỏ hàng cùng origin.
+## Nguồn và giấy phép
 
-## Phạm vi demo
+- Layout và SVG sản phẩm là phần thiết kế của dự án; không sử dụng template/framework frontend bên ngoài.
+- Hero được xử lý từ ảnh cún người dùng cung cấp; không phải bản gốc pixel-identical.
+- Font Outfit và Inter lấy từ kho Google Fonts chính thức; giấy phép SIL OFL ở `assets/fonts/*-OFL.txt`.
+- Google Maps là nội dung nhúng bên ngoài, cần mạng và chịu chính sách của Google.
+- Audio/video/Flash là gợi ý tùy chọn trong đề, không bổ sung Flash vì không còn được trình duyệt hiện đại hỗ trợ.
 
-- Thương hiệu, sản phẩm, review, tồn kho, địa chỉ và ngày đăng đều là minh họa, không phải cửa hàng hay hàng hóa đang kinh doanh.
-- Không xác thực, không gửi đơn thật, không thanh toán, không email, không vận chuyển, không đồng bộ giữa các thiết bị. Mã đơn chỉ có trên trình duyệt tạo đơn.
-- Giao tiêu chuẩn demo 30.000 ₫, miễn phí từ 599.000 ₫; giao nhanh 50.000 ₫. Giá hiển thị bằng `Intl.NumberFormat('vi-VN')`.
-- Icon tài khoản mở giải thích chế độ khách. Social mở thông tin thương hiệu demo; không giả mạo tài khoản/cổng thanh toán thật.
-- Nội dung chăm sóc thú cưng mang tính tham khảo, không thay thế tư vấn thú y.
-
-## Ảnh và font
-
-- Hero là ảnh đã xử lý/crop bằng công cụ tạo ảnh dựa trên ảnh cún người dùng cung cấp, không phải bản gốc pixel-identical. File: `assets/images/hero-puppy.png`.
-- 72 ảnh sản phẩm và 3 ảnh bài viết là SVG minh họa riêng cho dự án; không đại diện ảnh sản phẩm thương mại thật. Mỗi sản phẩm có ba góc trình bày riêng. Có fallback cục bộ khi ảnh lỗi.
-- Outfit và Inter tải từ kho Google Fonts chính thức. Giấy phép ở `assets/fonts/*-OFL.txt`.
-
-Xem [VALIDATION.md](VALIDATION.md) để biết kiểm thử thực tế và giới hạn đã xác định.
+Xem [VALIDATION.md](VALIDATION.md) để biết kiểm thử thực tế và giới hạn. Phần thông tin nhóm và bảng phân công Excel không thực hiện theo yêu cầu của bạn.

@@ -83,7 +83,7 @@
     P.toast?.(exists ? 'Đã bỏ khỏi danh sách yêu thích.' : 'Đã lưu một món yêu thích cho bé.');
   };
   const validOrder = order => {
-    if (!order || typeof order !== 'object' || typeof order.id !== 'string' || !/^PAWS-[A-Z0-9-]{4,40}$/.test(order.id) || !Array.isArray(order.items) || !order.items.length || order.items.length > 200) return null;
+    if (!order || typeof order !== 'object' || typeof order.id !== 'string' || !/^(?:SISIMIMI|PAWS)-[A-Z0-9-]{4,40}$/.test(order.id) || !Array.isArray(order.items) || !order.items.length || order.items.length > 200) return null;
     if (!['subtotal','shipping','total'].every(key => Number.isSafeInteger(order[key]) && order[key] >= 0)) return null;
     if (!['standard','express'].includes(order.delivery) || !['cod','demo-transfer'].includes(order.payment) || !Number.isFinite(Date.parse(order.createdAt))) return null;
     if (!order.items.every(item => item && typeof item.name === 'string' && item.name.length <= 200 && typeof item.variant === 'string' && item.variant.length <= 100 && Number.isSafeInteger(item.quantity) && item.quantity > 0 && Number.isSafeInteger(item.unitPrice) && item.unitPrice >= 0 && Number.isSafeInteger(item.lineTotal) && item.lineTotal === item.unitPrice * item.quantity)) return null;

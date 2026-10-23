@@ -23,7 +23,7 @@
     const image = p.images && p.images[0] || 'assets/images/fallback.svg';
     return '<article class="cart-line' + (compact ? ' cart-line-compact' : '') + '" data-cart-line="' + escape(p.id) + '" data-variant="' + escape(variantId) + '">' +
       '<a class="cart-line-image" href="product.html?id=' + encodeURIComponent(p.id) + '"><img src="' + escape(image) + '" alt="' + escape(p.name) + ' — sản phẩm minh họa" width="100" height="110" loading="lazy"></a>' +
-      '<div class="cart-line-body"><p class="product-brand">' + escape(p.brand || 'PAWS & CO.') + '</p><h3><a href="product.html?id=' + encodeURIComponent(p.id) + '">' + escape(p.name) + '</a></h3><p class="muted cart-variant">' + escape(variantLabel || 'Tiêu chuẩn') + '</p><p class="cart-unit-price">' + P.money(line.unitPrice) + '</p>' +
+      '<div class="cart-line-body"><p class="product-brand">' + escape(p.brand || 'sisimimi') + '</p><h3><a href="product.html?id=' + encodeURIComponent(p.id) + '">' + escape(p.name) + '</a></h3><p class="muted cart-variant">' + escape(variantLabel || 'Tiêu chuẩn') + '</p><p class="cart-unit-price">' + P.money(line.unitPrice) + '</p>' +
       '<div class="qty-control" role="group" aria-label="Số lượng ' + escape(p.name) + '">' +
       '<button type="button" data-cart-qty="-1" data-id="' + escape(p.id) + '" data-variant="' + escape(variantId) + '" aria-label="Giảm số lượng ' + escape(p.name) + '"' + (line.quantity <= 1 ? ' disabled' : '') + '>−</button>' +
       '<span aria-live="polite">' + line.quantity + '</span>' +
@@ -141,7 +141,7 @@
     const shipping = shippingPrice(subtotal, delivery);
     const random = window.crypto && window.crypto.getRandomValues ? window.crypto.getRandomValues(new Uint32Array(1))[0].toString(36).slice(-5) : Math.random().toString(36).slice(2, 7);
     const order = {
-      id: 'PAWS-' + Date.now().toString(36).toUpperCase() + '-' + random.toUpperCase(),
+      id: 'SISIMIMI-' + Date.now().toString(36).toUpperCase() + '-' + random.toUpperCase(),
       createdAt: new Date().toISOString(),
       items: lines.map(line => ({ id: line.product.id, name: line.product.name, variant: line.variant.label || line.variant.id, quantity: line.quantity, unitPrice: line.unitPrice, lineTotal: line.lineTotal })),
       subtotal, shipping, total: subtotal + shipping, delivery, payment
@@ -184,7 +184,7 @@
     }
     const date = new Date(order.createdAt);
     const dateText = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('vi-VN', { dateStyle: 'medium', timeStyle: 'short' }).format(date);
-    mount.innerHTML = '<section class="success-card"><span class="success-icon" aria-hidden="true"><svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="20"/><path d="m15 24 6 6 13-14"/></svg></span><p class="eyebrow">MỘT TRẢI NGHIỆM ĐẦY YÊU THƯƠNG</p><h1>Hoàn tất đơn hàng<br>mô phỏng!</h1><p>Cảm ơn bạn đã khám phá PAWS & CO. Đây là kết quả demo được tạo trên trình duyệt; không có đơn hàng thật được gửi, thanh toán hay giao hàng thực tế.</p><div class="order-reference"><span>Mã đơn hàng demo</span><strong>' + escape(order.id) + '</strong><small>' + escape(dateText) + '</small></div><div class="success-order-items">' + order.items.map(item => '<div class="summary-row"><span>' + escape(item.name) + '<small class="muted"> ' + escape(item.variant) + ' × ' + Number(item.quantity) + '</small></span><strong>' + P.money(Number(item.lineTotal)) + '</strong></div>').join('') + '</div>' + totalsMarkup(Number(order.subtotal), Number(order.shipping)) + '<p class="demo-notice">Thông tin người nhận không được lưu. Chỉ bản tóm tắt đơn hàng minh họa được giữ trên thiết bị này.</p><a class="button btn btn-primary" href="products.html">Tiếp tục khám phá ' + arrow + '</a><a class="text-link" href="index.html">Về trang chủ</a></section>';
+    mount.innerHTML = '<section class="success-card"><span class="success-icon" aria-hidden="true"><svg width="42" height="42" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="20"/><path d="m15 24 6 6 13-14"/></svg></span><p class="eyebrow">MỘT TRẢI NGHIỆM ĐẦY YÊU THƯƠNG</p><h1>Hoàn tất đơn hàng<br>mô phỏng!</h1><p>Cảm ơn bạn đã khám phá sisimimi Đây là kết quả demo được tạo trên trình duyệt; không có đơn hàng thật được gửi, thanh toán hay giao hàng thực tế.</p><div class="order-reference"><span>Mã đơn hàng demo</span><strong>' + escape(order.id) + '</strong><small>' + escape(dateText) + '</small></div><div class="success-order-items">' + order.items.map(item => '<div class="summary-row"><span>' + escape(item.name) + '<small class="muted"> ' + escape(item.variant) + ' × ' + Number(item.quantity) + '</small></span><strong>' + P.money(Number(item.lineTotal)) + '</strong></div>').join('') + '</div>' + totalsMarkup(Number(order.subtotal), Number(order.shipping)) + '<p class="demo-notice">Thông tin người nhận không được lưu. Chỉ bản tóm tắt đơn hàng minh họa được giữ trên thiết bị này.</p><a class="button btn btn-primary" href="products.html">Tiếp tục khám phá ' + arrow + '</a><a class="text-link" href="index.html">Về trang chủ</a></section>';
   }
 
   function restoreFocus(id, variant, direction) {
