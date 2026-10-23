@@ -1,139 +1,135 @@
-# S Chicken — Website bài tập Thiết kế Web
+# S Chicken — Professional Redesign
 
-Website tĩnh gồm **10 trang HTML**, dùng HTML5, CSS3 và JavaScript thuần. Không dùng framework, backend, cơ sở dữ liệu hay công cụ build. Không cần `npm install`.
+Website thức ăn nhanh gồm **10 trang HTML, 15 món, 5 danh mục**, viết bằng HTML5, CSS3 và JavaScript thuần. Không dùng framework, thư viện giao diện, backend, npm hay bước build.
 
-## 1. Bố cục và phong cách
-
-- Màu chính: đỏ `#C62828`; nhấn: vàng cam `#FFB300`; nền: trắng và kem `#FFF8EF`; chữ: `#222222`.
-- Font Arial/sans-serif. Bố cục Flexbox và Grid; responsive theo các mốc 1200, 980 và 600 px.
-- Trang chủ: hero gà sốt lớn, danh mục, 4 món bán chạy, banner combo, câu chuyện, 4 lý do chọn S, 3 tin tức và footer.
-- Header/footer có sẵn trong từng HTML nên vẫn điều hướng khi tắt JavaScript. Dropdown Khám phá chứa liên kết phụ; menu hamburger dành cho màn hình nhỏ.
-- Logo SVG do dự án tự thiết kế, sử dụng thống nhất. Hiệu ứng xuất hiện ảnh hero và hover nhẹ; tôn trọng cài đặt giảm chuyển động.
-
-## 2. Chạy website
+## Chạy website
 
 1. Mở thư mục `S-Chicken` trong Visual Studio Code.
-2. Cài tiện ích **Live Server** của Ritwick Dey nếu chưa có.
-3. Nhấp phải `index.html`, chọn **Open with Live Server**.
-4. Dùng cùng một địa chỉ và cổng trong suốt quá trình thử nghiệm để giỏ hàng được lưu chung.
+2. Cài tiện ích **Live Server** (Ritwick Dey) nếu chưa có.
+3. Nhấp phải `index.html` → **Open with Live Server**.
+4. Dùng cùng địa chỉ/cổng trong lúc thử để localStorage giữ chung giỏ hàng.
 
-Có thể mở trực tiếp `index.html`, nhưng localStorage trên giao thức `file:` khác nhau tùy trình duyệt; nên dùng Live Server để kiểm tra chuyển trang và giỏ hàng ổn định.
+Có thể mở HTML trực tiếp, nhưng localStorage trên `file:` không thống nhất giữa trình duyệt; nên dùng Live Server. Nếu có Python, lệnh `python3 -m http.server 8000` cũng phục vụ được tệp tĩnh. Python không phải phụ thuộc của website và không phải backend của dự án.
 
-Nếu máy có Python, có thể dùng lệnh tùy chọn sau ngay trong thư mục `S-Chicken`:
+HTML, CSS, JavaScript, ảnh và font đều nằm cục bộ. Google Maps nhúng và liên kết mạng xã hội cần Internet.
 
-```sh
-python3 -m http.server 8000
-```
+## Những gì thay đổi trong bản nâng cấp
 
-Đây chỉ là công cụ phục vụ tệp tĩnh để thử nghiệm, không phải backend của dự án. Website không cần Python khi chạy bằng Live Server hoặc được đưa lên dịch vụ hosting tĩnh.
+- **Trang chủ làm mới:** hero nền kem, ảnh gà giòn lớn, typography đậm, CTA chính/phụ, danh mục, 4 món bán chạy, combo, câu chuyện và tin tức.
+- **Hệ thống thiết kế chung:** đỏ `#C62828`, đỏ đậm `#991B1B`, vàng `#FFB800`, nền kem `#FFF8EF`, chữ `#222222`/`#666666`; container tối đa 1240 px; thang khoảng cách 8/16/24/32/48/64/96 px.
+- **Typography cục bộ:** Barlow Condensed ExtraBold cho tiêu đề, Be Vietnam Pro cho nội dung; có fallback Arial/sans-serif, không gọi Google Fonts lúc chạy.
+- **Thẻ món:** ảnh cùng tỷ lệ, badge nổi bật, thông tin co giãn để giá/nút thẳng hàng, hover nâng nhẹ và zoom ảnh.
+- **Mobile:** menu SVG chuyển động, focus/inert/aria; nút dễ bấm; ở 320 px thẻ món về một cột để giữ chữ dễ đọc.
+- **Tương tác:** FAQ mở/đóng mượt; reveal khi cuộn bằng IntersectionObserver; toast có link xem giỏ; trạng thái lỗi/thành công rõ ràng; tôn trọng `prefers-reduced-motion`.
+- **Ảnh:** thêm ảnh minh họa AI riêng cho gà giòn/gà sốt; giữ ghi chú về ảnh dùng chung và nguồn ảnh.
+- **Mã nguồn:** HTML xuống dòng/thụt lề, CSS chia nhóm và JS có chú thích tiếng Việt. Vẫn mở chạy trực tiếp, không có quy trình build.
 
-## 3. Cấu trúc và vai trò từng tệp
+Xem [audit, design system và bàn giao](docs/REDESIGN.md), [kết quả kiểm thử](docs/KIEM_THU.md).
+
+## Cấu trúc dự án
 
 ```text
 S-Chicken/
 ├── index.html                 # Trang chủ
-├── about.html                 # Thương hiệu, đội ngũ, cam kết
-├── products.html              # 15 món, bộ lọc và tìm kiếm
-├── product-detail.html        # Chi tiết món theo ?id=
-├── blog.html                  # 6 bài viết, mở rộng nội dung
-├── contact.html               # Form và Google Maps minh họa
-├── faq.html                   # 9 câu hỏi dạng accordion
-├── login.html                 # Hai biểu mẫu đăng nhập/đăng ký mô phỏng
-├── cart.html                  # Giỏ hàng, tổng tiền và xác nhận giả lập
+├── about.html                 # Câu chuyện, đội ngũ và chất lượng
+├── products.html              # Thực đơn, lọc và tìm kiếm
+├── product-detail.html        # Chi tiết theo ?id=
+├── blog.html                  # 6 tin tức, mở rộng nội dung
+├── contact.html               # Liên hệ và bản đồ minh họa
+├── faq.html                   # 9 câu hỏi
+├── login.html                 # Đăng nhập/đăng ký mô phỏng
+├── cart.html                  # Giỏ và xác nhận đơn giả lập
 ├── careers.html               # 3 vị trí và form ứng tuyển
-├── css/style.css              # CSS dùng chung, chia mục có chú thích
-├── js/products.js             # Mảng dữ liệu 15 món + định dạng VNĐ
-├── js/cart.js                 # Đọc/lưu giỏ, số lượng, tổng tiền
-├── js/main.js                 # Menu, bộ lọc, chi tiết, FAQ, form
-├── images/                    # 14 hình cục bộ, gồm logo
-├── docs/BAO_CAO.md             # Dàn ý 10 slide, phân vai, câu hỏi bảo vệ
-├── docs/PHAN_CONG.csv          # Mẫu mở được bằng Excel
+├── css/style.css              # Design tokens, thành phần, responsive
+├── js/products.js             # Dữ liệu 15 món
+├── js/cart.js                 # Lưu giỏ, tính tổng và thao tác món
+├── js/main.js                 # Menu, lọc, chi tiết, FAQ, form, reveal
+├── images/                    # Ảnh, logo và SVG cục bộ
+├── fonts/                     # Font cục bộ và giấy phép OFL
+├── docs/                      # Audit, kiểm thử và tài liệu báo cáo
 └── README.md
 ```
 
-## 4. Cách đọc và chỉnh sửa
+Chỉ bổ sung `fonts` để typography đồng nhất khi không có Internet và các ảnh cần cho nâng cấp; không thêm thư viện hoặc mã chạy máy chủ.
 
-### Nội dung và giao diện
+## Cách đọc và chỉnh sửa mã
 
-- Đổi màu tại khối `:root` đầu `css/style.css`.
-- Đổi chữ trong HTML tương ứng. Header/footer được viết trực tiếp ở cả 10 trang để sinh viên dễ đọc. Khi đổi menu, cần cập nhật cả 10 trang.
-- CSS chia 7 nhóm: nền tảng, header/footer, trang chủ, trang phụ, biểu mẫu/FAQ, giỏ hàng, responsive.
-- Không cần hiểu công cụ tạo mã hay chạy một bước sinh tệp nào: tất cả HTML bàn giao là mã hoàn chỉnh.
+### CSS và bố cục
 
-### Dữ liệu sản phẩm
+- Khối `:root` đầu `css/style.css` giữ màu, font, khoảng cách, radius và chiều rộng container.
+- CSS chia mục: nền tảng; header; trang chủ; product card; tin tức/footer; trang phụ; form; FAQ/tuyển dụng; giỏ/toast; tablet/mobile.
+- Grid chia cột nội dung; Flexbox căn menu, giá/nút và nội dung thẻ.
+- `clamp()` cho cỡ tiêu đề co giãn. Media query ở 1200/1024/680/359 px điều chỉnh bố cục.
+- Product card là flex theo cột, `.product-bottom { margin-top: auto; }` giữ hàng giá/nút ở đáy khi mô tả khác độ dài.
 
-Mỗi món trong `js/products.js` có `id`, `name`, `category`, `price`, `image`, `description`, `ingredients`. `price` là số nguyên tính bằng đồng, không phải chuỗi có dấu chấm.
+### HTML và sản phẩm
 
-- Trang chi tiết đọc ID bằng `URLSearchParams`, rồi tìm món bằng `find`.
-- Thẻ thực đơn nằm sẵn trong `products.html`, và 4 thẻ nổi bật nằm trong `index.html`. Khi đổi tên, giá hoặc thêm món, cập nhật các thẻ tương ứng để thống nhất với `products.js`.
-- Ảnh lấy từ thư mục `images`. Nếu đổi ảnh, đổi cả trường `image` trong dữ liệu và `src` ở các thẻ HTML tương ứng.
-- Có thể tự chụp 15 ảnh đúng từng món để thay ảnh minh họa đang được dùng chung. Không đổi ID cũ khi muốn giữ tính nhất quán của giỏ hàng đã lưu.
+- Mỗi trang có title riêng, một vùng main, header/footer và liên kết thật.
+- Header/footer được viết sẵn để dễ đọc và điều hướng ngay cả khi không có JavaScript. Khi đổi menu cần cập nhật cả 10 trang.
+- Mảng `products` gồm ID, tên, danh mục, giá nguyên theo đồng, tên ảnh, mô tả và thành phần.
+- Thực đơn và 4 món ở trang chủ có thẻ HTML viết sẵn. Khi đổi tên/giá/ảnh cần cập nhật `products.js` **và** thẻ HTML tương ứng; thẻ liên quan ở trang chi tiết lấy từ mảng.
+- `URLSearchParams` đọc ID trên URL, `find` lấy món tương ứng. ID không hợp lệ có trạng thái riêng.
+- `data-category` và `data-name` giúp JavaScript lọc/ẩn thẻ theo danh mục và từ khóa. Danh mục trên URL được kiểm tra trước khi dùng.
 
 ### Giỏ hàng
 
-- localStorage dùng khóa `schicken-cart`, chỉ lưu mảng `{ id, quantity }`.
-- Giới hạn mỗi món 1–99 phần; giảm ở mức 1 không tự xóa, nút Xóa món dùng để xóa.
-- Tính tổng từ dữ liệu giá đáng tin cậy trong `products.js`, không lấy giá từ localStorage.
-- Loại bỏ ID và số lượng không hợp lệ khi khôi phục giỏ, xử lý JSON hỏng.
-- Nếu trình duyệt chặn lưu trữ, vẫn thao tác trong trang đang mở nhưng không bảo đảm giữ giỏ khi chuyển trang; có thông báo khi thêm món.
-- Nhấn Thanh toán sẽ mở hộp xác nhận giả lập và làm trống giỏ. Không thu tiền, gửi đơn hoặc gọi API.
+- localStorage giữ khóa `schicken-cart`, chỉ lưu `{ id, quantity }`; không lưu tài khoản hoặc dữ liệu nhạy cảm.
+- `loadCart()` xử lý JSON sai, phần tử null, ID không tồn tại, số lượng không hợp lệ và ID trùng.
+- Mỗi món tối đa 99 phần, tối thiểu 1; nút Xóa món dùng để bỏ khỏi giỏ.
+- Tổng tiền = tổng của giá trong `products.js` × số lượng. Không lấy giá từ localStorage.
+- `renderCart()` vẽ lại danh sách; event delegation xử lý nút vừa tạo. Giữ focus sau tăng/giảm/xóa để thao tác bàn phím tiếp tục được.
+- Sự kiện `storage` đồng bộ nhiều tab tại chỗ. Nếu trình duyệt chặn lưu, giỏ chỉ giữ trong trang đang mở và có thông báo.
+- Xác nhận đơn mở dialog rồi làm trống giỏ; không thu tiền hoặc gửi đơn thực tế.
 
-### Biểu mẫu
+### Hiệu ứng và biểu mẫu
 
-- HTML dùng `required`, `type="email"`, `pattern`, `minlength` để hỗ trợ kiểm tra dữ liệu.
-- JavaScript chặn chuỗi chỉ có khoảng trắng và kiểm tra hai mật khẩu phải giống nhau.
-- Thông báo thành công dùng `textContent`; không chèn dữ liệu người dùng vào HTML.
-- Không gửi form, không lưu mật khẩu, không tạo phiên đăng nhập. **Chỉ dùng thông tin giả khi thử.**
-- Nếu làm hệ thống thực tế trong tương lai sẽ cần backend và bảo mật ngoài phạm vi bài tập.
+- Menu dùng `.open` và CSS opacity/transform; JavaScript quản lý `aria-expanded`, `inert`, Escape, bấm ngoài và đổi viewport.
+- FAQ đo `scrollHeight` để chuyển chiều cao; sau khi đóng xong mới bật `hidden`, tránh đóng đột ngột. CSS giảm chuyển động khi người dùng yêu cầu.
+- IntersectionObserver thêm `.is-visible` khi khối vào màn hình. HTML không có class ẩn sẵn nên nếu JS/observer không chạy, nội dung vẫn hiển thị.
+- Toast tạo các node bằng DOM; nội dung dùng `textContent`. Có link giỏ và nút đóng.
+- Form dùng quy tắc HTML5 (`required`, email, pattern, minlength) và JavaScript kiểm tra khoảng trắng/xác nhận mật khẩu. Báo lỗi cạnh form và đặt `aria-invalid` cho trường sai.
+- **Không dùng mật khẩu thật khi thử.** Không có xác thực, lưu tài khoản, gửi email hoặc gửi hồ sơ. Tất cả thông báo đều ghi rõ mô phỏng.
 
-## 5. Hình ảnh và nguồn sử dụng
+## Nguồn ảnh và font
 
-Toàn bộ hình đã có trong `images`, không cần tải thêm để chạy. Gồm 8 ảnh raster và 6 SVG. Ảnh món chỉ mang tính minh họa; nhiều biến thể gà dùng chung một ảnh. Các loại trà và khoai dùng minh họa SVG tự thiết kế. Hình nhân viên là SVG minh họa gốc, không phải ảnh nhân sự thật.
+Xem [images/SOURCES.md](images/SOURCES.md) cho nguồn và phạm vi sử dụng. Ảnh AI được ghi rõ là minh họa, không phải ảnh món thật của cơ sở kinh doanh. Một số biến thể dùng chung ảnh. Thay bằng ảnh tự chụp nếu cần thể hiện khẩu phần chính xác.
 
-| Tệp | Nguồn |
+Một số ảnh cũ lấy từ Foodie/Grilli của codewithsadee. Grilli có giấy phép MIT đính kèm; Foodie ghi “free to use” nhưng không cấp phép riêng cho từng ảnh. Nếu dùng thương mại, kiểm tra quyền từng ảnh hoặc thay bằng ảnh có quyền rõ ràng. Không nhận hình minh họa là cửa hàng/nhân sự thật.
+
+Font lấy từ kho chính thức [Google Fonts](https://github.com/google/fonts): Barlow Condensed và Be Vietnam Pro, giấy phép SIL Open Font License trong `fonts/*-OFL.txt`.
+
+## Bảng đối chiếu yêu cầu giảng viên
+
+| Yêu cầu | Phần đã triển khai |
 | --- | --- |
-| `hero-banner.png`, `about-banner.png`, `food-menu-2.png`, `food-menu-3.png`, `blog-1.jpg`, `blog-2.jpg`, `blog-3.jpg` | https://github.com/codewithsadee/foodie/tree/master/assets/images |
-| `about-banner.jpg` | https://github.com/codewithsadee/grilli/tree/master/assets/images |
-| `logo.svg`, `fries.svg`, `soda.svg`, `lemon-tea.svg`, `peach-tea.svg`, `team.svg` | Minh họa SVG tự thiết kế cho dự án |
+| HTML/CSS/JS thuần, không framework/backend/build | 10 HTML, 1 CSS và 3 JS |
+| Logo SVG, nhận diện và điều hướng đồng nhất | Header/footer toàn bộ trang, `images/logo.svg` |
+| Trang chủ đầy đủ 8 nhóm nội dung | Hero, giới thiệu, 4 món, ưu đãi, lý do chọn, tin tức và footer |
+| Giới thiệu đủ câu chuyện/sứ mệnh/tầm nhìn/giá trị/đội ngũ | `about.html` |
+| Tối thiểu 12 món, 5 danh mục | 15 món và lọc/tìm tại `products.html` |
+| Chi tiết ID, thành phần, số lượng, liên quan, đánh giá | `product-detail.html`, `main.js` |
+| 6 bài viết mở rộng | `blog.html` |
+| Liên hệ 5 trường và Google Maps địa điểm demo | `contact.html` |
+| Tối thiểu 8 FAQ, accordion mượt | 9 câu tại `faq.html` |
+| Form đăng nhập/đăng ký, kiểm tra mật khẩu | `login.html`, không lưu tài khoản/mật khẩu |
+| Giỏ thêm/tăng/giảm/xóa/lưu/tính tổng/trống/xác nhận giả | `cart.html`, `cart.js` |
+| 3 vị trí tuyển dụng, quyền lợi, form | `careers.html` |
+| Hover, zoom, reveal, menu/FAQ, toast, reduced motion | `style.css` và `main.js` |
+| Ảnh cục bộ, alt, lazy loading dưới màn hình đầu | `images`, thẻ img trong HTML/JS |
+| Responsive điện thoại, tablet, desktop | Media queries; kết quả thực chạy trong tài liệu kiểm thử |
+| Dàn ý PowerPoint và mẫu Excel phân công | `docs/BAO_CAO.md`, `docs/PHAN_CONG.csv` |
 
-README của Foodie ghi dự án “free to use” và không có giấy phép riêng. Bản lưu thông tin nguồn nằm ở `images/SOURCES.md`. Grilli dùng giấy phép MIT, đã giữ bản giấy phép tại `images/grilli-LICENSE.txt`. Kho nguồn không cung cấp thông tin tác giả/quyền riêng từng ảnh; trước khi dùng thương mại, cần kiểm tra thêm quyền hình ảnh hoặc thay bằng ảnh tự chụp/được cấp phép rõ ràng. Logo và minh họa gốc không sao chép logo của nguồn ảnh.
+## Tự kiểm tra trước khi nộp
 
-Google Maps cần Internet; bản đồ khu vực Chùa Bộc chỉ minh họa, không xác nhận cửa hàng thật tại địa chỉ đó. Facebook, Instagram, YouTube dẫn đến trang chủ nền tảng, không giả nhận là kênh chính thức của S Chicken.
+1. Mở từng trang và xem Console không báo lỗi JavaScript.
+2. Lọc đủ 5 danh mục; tìm có/không có kết quả; thử URL danh mục.
+3. Mở `product-detail.html?id=3`; thử ID 999, số lượng 1 và 99.
+4. Thêm 2 burger 49.000 ₫ và 1 gà 39.000 ₫ → **137.000 ₫**. Tăng gà lên 2 → **176.000 ₫**.
+5. Tải lại, mở tab khác, giảm/xóa món và xem giỏ cập nhật. Xóa hết để thử trạng thái trống.
+6. Xác nhận đơn mô phỏng; không nhập thông tin thẻ.
+7. Thử form trống, email sai, điện thoại sai, khoảng trắng, mật khẩu không khớp rồi dữ liệu đúng.
+8. Mở/đóng FAQ và bài viết; thử nút ứng tuyển chọn đúng vị trí.
+9. Thử 320,375,480,768,1024,1440 px; dùng bàn phím cho menu, Escape và biểu mẫu.
+10. Bật cài đặt Reduce motion để kiểm tra nội dung vẫn hiện. Chạy riêng trên Chrome, Edge và Firefox ở máy nộp bài.
 
-## 6. Bảng đối chiếu yêu cầu
-
-| Yêu cầu | Đã triển khai ở đâu |
-| --- | --- |
-| HTML5, CSS3, JS thuần; không framework/backend/build | Toàn bộ 10 HTML, 1 CSS, 3 JS |
-| Logo SVG; màu sắc, font thống nhất | `images/logo.svg`, `css/style.css` |
-| Trang chủ đủ hero, giới thiệu, 4 món, khuyến mãi, lý do chọn, tin tức | `index.html` |
-| Câu chuyện, sứ mệnh, tầm nhìn, giá trị, chất lượng, đội ngũ | `about.html` |
-| Tối thiểu 12 món và 5 danh mục | `products.html`: 15 món; lọc + tìm kiếm |
-| Chi tiết theo ID, thành phần, số lượng, món liên quan, đánh giá | `product-detail.html`, `main.js` |
-| Tối thiểu 6 bài, ảnh/ngày/mô tả/đọc thêm | `blog.html`: 6 bài |
-| Địa chỉ demo, thông tin mẫu, đủ 5 trường, bản đồ | `contact.html` |
-| Tối thiểu 8 FAQ mở/đóng | `faq.html`: 9 câu |
-| Đăng nhập/đăng ký; xác nhận mật khẩu, không lưu mật khẩu | `login.html`, `main.js` |
-| Giỏ thêm, tăng/giảm/xóa, tính tổng, trống, tiếp tục mua, thanh toán giả | `cart.html`, `cart.js` |
-| Tuyển dụng 3 vị trí, quyền lợi, mô tả/yêu cầu và form | `careers.html` |
-| Header/footer thống nhất, liên kết đủ 10 trang, active, hamburger | Tất cả HTML; chi tiết món có breadcrumb về thực đơn |
-| Mỗi trang có title riêng | Thẻ `<title>` mỗi HTML; trang chi tiết đổi theo món |
-| Grid/Flexbox, hover/transition/animation/responsive | `css/style.css` |
-| Tối thiểu 8 hình, ưu tiên 12–20 | 14 hình cục bộ, gồm 8 ảnh raster + 6 SVG |
-| Mã dễ đọc, chú thích tiếng Việt, dùng addEventListener | 3 tệp JS, CSS chia mục |
-| Dàn ý báo cáo, Excel, chức năng bảo vệ, hỏi đáp | `docs/BAO_CAO.md`, `docs/PHAN_CONG.csv` |
-
-## 7. Cách tự kiểm tra trước khi nộp
-
-1. Mở DevTools → Console; tải từng trang để kiểm tra lỗi JavaScript.
-2. Tại Thực đơn, lần lượt lọc 5 danh mục, thử tìm có/không có kết quả.
-3. Mở hai món khác nhau; kiểm tra tên/giá đổi theo ID. Thử `?id=999`.
-4. Thêm 2 burger 49.000 ₫ và 1 gà 39.000 ₫ → tổng **137.000 ₫**. Tăng gà lên 2 → **176.000 ₫**. Xóa burger → **78.000 ₫**.
-5. Tải lại và chuyển trang, kiểm tra giỏ vẫn còn. Xóa hết để kiểm tra trạng thái trống.
-6. Thanh toán mô phỏng: xem hộp xác nhận, giỏ được xóa, không nhập thẻ.
-7. Form: thử thiếu trường, email sai, điện thoại sai, khoảng trắng, mật khẩu không khớp, sau đó dữ liệu đúng.
-8. Thử mở/đóng cả FAQ và bài viết; thử nút ứng tuyển chọn đúng vị trí.
-9. Dùng chế độ thiết bị ở 375, 768, 1440 px, kiểm tra không tràn ngang; thử hamburger và phím Escape.
-10. Lặp lại trên Chrome, Edge và Firefox ở máy nộp bài. Xóa dữ liệu demo trong DevTools → Application → Local Storage nếu cần.
-
-Kiểm thử tự động trong môi trường hiện tại dùng Chromium; không coi đó là xác minh riêng trên Chrome, Edge hay Firefox. Google Maps bên ngoài không được xác nhận tải thành công trong môi trường đám mây bị giới hạn mạng. Không có chức năng giao dịch, đăng nhập hoặc gửi biểu mẫu thực tế.
+Kết quả trong môi trường hiện tại được báo chính xác trong [KIEM_THU.md](docs/KIEM_THU.md). Chromium không thay thế việc kiểm tra riêng trên Chrome/Edge/Firefox. Bản đồ và mạng xã hội cần mạng ngoài; địa chỉ, số điện thoại, ưu đãi, nhân sự và mọi giao dịch đều là demo.

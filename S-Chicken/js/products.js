@@ -5,7 +5,7 @@ const products = [
     "name": "Gà giòn nguyên bản",
     "category": "Gà rán",
     "price": 39000,
-    "image": "food-menu-3.png",
+    "image": "hero-chicken.webp",
     "description": "Lớp vỏ giòn rụm, thịt gà mềm ngọt, đậm vị S Chicken.",
     "ingredients": "Thịt gà, bột mì, trứng, gia vị; có gluten và trứng."
   },
@@ -14,7 +14,7 @@ const products = [
     "name": "Gà sốt cay Hàn Quốc",
     "category": "Gà sốt",
     "price": 45000,
-    "image": "food-menu-3.png",
+    "image": "chicken-sauce.webp",
     "description": "Gà giòn phủ sốt cay ngọt, thêm mè rang thơm bùi.",
     "ingredients": "Thịt gà, tương ớt, mè, bột mì; có gluten, đậu nành và mè."
   },
@@ -41,7 +41,7 @@ const products = [
     "name": "Gà giòn đôi bạn",
     "category": "Gà rán",
     "price": 75000,
-    "image": "food-menu-3.png",
+    "image": "hero-chicken.webp",
     "description": "Hai phần gà giòn cho cuộc hẹn vui hơn.",
     "ingredients": "Thịt gà, bột mì, trứng, gia vị; có gluten và trứng."
   },
@@ -50,7 +50,7 @@ const products = [
     "name": "Cánh gà giòn rụm",
     "category": "Gà rán",
     "price": 59000,
-    "image": "food-menu-3.png",
+    "image": "hero-chicken.webp",
     "description": "Cánh gà giòn thơm, dùng cùng sốt chấm đặc trưng.",
     "ingredients": "Cánh gà, bột mì, gia vị; có gluten."
   },
@@ -59,7 +59,7 @@ const products = [
     "name": "Gà sốt mật ong",
     "category": "Gà sốt",
     "price": 45000,
-    "image": "food-menu-3.png",
+    "image": "chicken-sauce.webp",
     "description": "Vị mật ong ngọt dịu quyện cùng lớp gà giòn.",
     "ingredients": "Thịt gà, mật ong, bột mì, nước tương; có gluten và đậu nành."
   },
@@ -68,7 +68,7 @@ const products = [
     "name": "Gà sốt tỏi",
     "category": "Gà sốt",
     "price": 45000,
-    "image": "food-menu-3.png",
+    "image": "chicken-sauce.webp",
     "description": "Sốt tỏi thơm lừng, đậm đà mà không quá cay.",
     "ingredients": "Thịt gà, tỏi, nước tương, bột mì; có gluten và đậu nành."
   },

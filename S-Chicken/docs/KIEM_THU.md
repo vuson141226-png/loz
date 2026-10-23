@@ -1,28 +1,52 @@
-# Kết quả kiểm thử trong môi trường phát triển
+# Kết quả kiểm thử Professional Redesign
 
-Công cụ: Chromium headless thật qua Playwright, phục vụ tệp HTML tĩnh bằng Python HTTP server. Các công cụ này chỉ phục vụ kiểm thử, không là phụ thuộc của website. Không cần cài Playwright, Python hoặc Node để chạy bằng Live Server.
+Ngày kiểm tra: **23/10/2026**. Trình duyệt thực thi: **Chromium headless** qua Playwright, phục vụ tệp HTML tĩnh bằng HTTP server cục bộ. Playwright và HTTP server chỉ là công cụ kiểm thử của môi trường, không là phụ thuộc để người dùng chạy website bằng Live Server.
 
-## Đã đạt
+## 1. Kết quả tổng thể
 
-- 10 trang có title riêng, không trùng ID HTML, mọi đường dẫn tệp cục bộ tồn tại.
-- 30 lượt trang ở 375, 768, 1440 px: ảnh tải được; không có tràn ngang hoặc lỗi JavaScript trong lượt kiểm tra.
-- Hiển thị 15 món; lọc gà sốt, danh mục từ URL, tìm trong danh mục, trạng thái không có kết quả.
-- Trang chi tiết đúng ID; trạng thái ID không tồn tại; điều chỉnh số lượng và giới hạn tối đa 99.
-- Thêm 2 burger và 1 gà → 137.000 ₫; tăng số lượng gà → 176.000 ₫; giảm → 137.000 ₫; xóa burger → 39.000 ₫.
-- Giỏ giữ sau khi tải lại; xác nhận mô phỏng mở dialog và xóa giỏ; trạng thái giỏ trống đúng.
-- JSON giỏ bị hỏng, ID không tồn tại và số lượng âm không làm trang lỗi.
-- FAQ và tin tức mở/đóng đúng.
-- Đăng ký bắt lỗi xác nhận mật khẩu; đăng ký/đăng nhập đúng hiện thành công giả lập; không có mật khẩu trong localStorage.
-- Trường email sai bị đánh dấu không hợp lệ; form liên hệ và ứng tuyển hợp lệ hiện thông báo mô phỏng.
-- Nút ứng tuyển chọn đúng vị trí; hamburger hoạt động và Escape đóng menu.
-- JavaScript qua kiểm tra cú pháp.
+- Bộ kiểm thử hồi quy chính: **179 phép kiểm tra đạt, 0 thất bại**, không ghi nhận `pageerror` JavaScript.
+- Responsive: **60 lượt trang**, tức đủ 10 trang ở **320, 375, 480, 768, 1024 và 1440 px**. Ảnh cục bộ tải được, không phát hiện tràn ngang ở các lượt kiểm tra.
+- Kiểm tra riêng **giỏ có 3 dòng món, số lượng lớn** ở cả 6 độ rộng: đạt. Tổng 99 gà nguyên bản + 2 burger + 1 combo hội bạn là **4.118.000 ₫**; nút tăng món đã đạt 99 ở trạng thái disabled.
+- Kiểm tra riêng **320×568 px**: section thực đơn và card hiển thị với opacity 1 sau khi cuộn, không tràn ngang. Có thử cho section bắt đầu ngoài viewport để thực sự đi qua IntersectionObserver.
+- Click cả **5 danh mục trên trang chủ**: mỗi danh mục sang thực đơn đúng và hiện 3 món; riêng “Burger & món kèm” có `%26` trong URL.
+- Vùng thông báo form ban đầu không hiện viền rỗng; chỉ xuất hiện khối thông báo khi có lỗi hoặc thành công.
 
-Lượt kiểm thử tự động hoàn tất 523 phép kiểm tra, bao gồm nhiều phép kiểm tra đường dẫn tệp lặp giữa các trang; đây không phải 523 kịch bản nghiệp vụ độc lập. Đã xem ảnh chụp giao diện desktop và mobile.
+179 là số phép kiểm tra trong bộ hồi quy chính, không phải 179 kịch bản kinh doanh độc lập. Các ca bổ sung về giỏ có món, viewport ngắn và đường dẫn danh mục được thực thi riêng sau đó.
 
-## Chưa xác minh / giới hạn
+## 2. Các hành vi đã thực thi
 
-- Chrome, Edge và Firefox bản cài riêng chưa chạy trong môi trường này. Nhóm cần kiểm tra trên máy nộp bài.
-- Google Maps nhúng cần mạng ngoài; chưa xác nhận hiển thị thành công trong mạng đám mây bị giới hạn. Địa chỉ là minh họa.
-- Chưa kiểm tra bằng thiết bị cảm ứng vật lý hoặc trình đọc màn hình.
-- Không có backend, xác thực, gửi email/hồ sơ, giao hàng hoặc thanh toán thật theo đúng phạm vi bài tập.
-- Một số ảnh sản phẩm dùng chung; xem README về nguồn và giới hạn quyền hình ảnh.
+| Nhóm | Kết quả quan sát |
+| --- | --- |
+| Cấu trúc/điều hướng | Đủ 10 HTML, title riêng, không có ID trùng trong mỗi trang; đường dẫn tệp và anchor cục bộ tồn tại |
+| Thực đơn | Hiện 15 món; lọc gà sốt còn 3; tìm trong danh mục; có thông báo khi không khớp; category URL đúng/sai được xử lý |
+| Chi tiết món | ID 3 mở burger đúng; ID 999 hiện không tìm thấy; số lượng bị chặn tối đa 99 |
+| Thêm giỏ | Thêm 2 phần từ trang chi tiết; badge cập nhật đúng; toast xuất hiện |
+| Tổng tiền | 2 burger + 1 gà = 137.000 ₫; tăng gà = 176.000 ₫; giảm = 137.000 ₫; xóa burger = 39.000 ₫ |
+| Lưu giỏ | Tải lại vẫn còn 2 dòng; JSON hỏng/ID sai/số lượng âm/phần tử sai kiểu không làm trang lỗi |
+| Xác nhận demo | Mở dialog, xóa giỏ đã xác nhận, quay về trạng thái trống có liên kết tiếp tục mua |
+| FAQ/tin tức | Mở và đóng được; chờ kết thúc chuyển động rồi xác nhận hidden và aria-expanded |
+| Đăng ký | Mật khẩu xác nhận sai bị chặn; dữ liệu đúng báo thành công mô phỏng; không lưu tài khoản/mật khẩu |
+| Đăng nhập | Dữ liệu giả hợp lệ hiện thông báo thành công mô phỏng |
+| Liên hệ | Email sai định dạng không hợp lệ; tên chỉ có khoảng trắng bị chặn; dữ liệu đúng hiện thông báo giả lập |
+| Tuyển dụng | Nút ứng tuyển chọn đúng vị trí; dữ liệu hợp lệ hiện thông báo giả lập |
+| Menu di động | Mở được, Escape đóng và trả focus; chuyển desktop không giữ khóa cuộn |
+| Reduce motion | Tắt smooth scroll; menu vẫn hoạt động |
+| Khi tắt JavaScript | Tiêu đề/nội dung chính trang chủ và 15 thẻ thực đơn vẫn hiển thị; các tính năng động cần JavaScript |
+
+## 3. Kiểm tra giao diện thực tế
+
+Đã chụp các trang chủ, thực đơn, chi tiết, giỏ, FAQ và đăng nhập ở các kích thước đại diện. Đã xem ảnh chụp các bố cục mobile, đặc biệt giỏ 320 px có nhiều món/số lượng lớn, FAQ, chi tiết và biểu mẫu. Lỗi viền thông báo rỗng được phát hiện trong ảnh đăng nhập rồi sửa và kiểm tra lại có border-left 0 px trước khi người dùng gửi form.
+
+Kiểm tra opacity riêng tránh nhầm một phần tử có kích thước trong DOM với nội dung thực sự đang hiển thị: section dài của thực đơn phải đạt opacity 1 sau khi xuất hiện ở viewport ngắn.
+
+## 4. Giới hạn chưa xác minh
+
+- Chưa chạy riêng **Chrome, Edge và Firefox bản cài**. Nhóm cần thử lại trên các trình duyệt của máy nộp bài.
+- Chưa xác nhận **Google Maps bên ngoài** tải thành công trong mạng đám mây bị giới hạn. Địa chỉ trên bản đồ là minh họa.
+- Chưa thử trên điện thoại vật lý hoặc công cụ đọc màn hình. Kiểm tra kích thước trong Chromium không thay thế hoàn toàn kiểm tra thiết bị thật.
+- Không có backend, xác thực, gửi email/hồ sơ, giao hàng hay thanh toán thật theo đúng phạm vi bài tập.
+- Một số món dùng chung ảnh minh họa; ảnh AI không phải ảnh chụp sản phẩm thực tế. Nguồn và giấy phép ảnh/font được ghi trong dự án.
+
+## 5. Tự kiểm tra trước khi nộp
+
+Mở `index.html` bằng Live Server; dùng Console và Device Toolbar. Chạy lại hành trình **trang chủ → danh mục → chi tiết → thêm giỏ → thay đổi số lượng → xác nhận mô phỏng**. Thử form sai rồi đúng; bật Reduce motion; kiểm tra menu bằng bàn phím. Đối chiếu các tổng tiền mẫu trong bảng trên, rồi lặp lại trên Chrome, Edge và Firefox. Không nhập mật khẩu thật hoặc thông tin thanh toán cá nhân.

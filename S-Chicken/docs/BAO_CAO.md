@@ -8,7 +8,7 @@
 | 2 | Mục tiêu, đối tượng học sinh/sinh viên; giới hạn website tĩnh | Bảng mục tiêu |
 | 3 | Công cụ: VS Code, Live Server, DevTools; HTML5/CSS3/JS | Vai trò từng công cụ; không dùng framework |
 | 4 | Sơ đồ 10 trang và thanh điều hướng | Sơ đồ liên kết từ trang chủ |
-| 5 | Bộ nhận diện: màu đỏ/vàng/kem, logo SVG, Arial, Grid/Flexbox | Ảnh 375/768/1440 px |
+| 5 | Bộ nhận diện: màu đỏ/vàng/kem, logo SVG, Barlow Condensed / Be Vietnam Pro, Grid/Flexbox | Ảnh 375/768/1440 px |
 | 6 | Trang chủ, giới thiệu và tuyển dụng | Hero, 4 món bán chạy, form ứng tuyển |
 | 7 | Thực đơn và trang chi tiết | Lọc 5 nhóm, tìm món, URL ?id=3 |
 | 8 | Giỏ hàng và localStorage | Demo 2 burger + 1 gà = 137.000 ₫, tăng/giảm/xóa |
@@ -105,3 +105,29 @@ Trong môi trường phát triển đã kiểm tra bằng Chromium. Chrome, Edge
 
 **22. Website cần Internet không?**  
 HTML, CSS, JS và ảnh đều là tệp cục bộ, không có thư viện CDN. Bản đồ Google Maps và các liên kết mạng xã hội cần Internet; có thể bị chặn ở một số môi trường.
+
+## Bổ sung cho phần bảo vệ bản Professional Redesign
+
+**23. Vì sao thêm thư mục fonts khi không dùng thư viện?**
+
+Đây chỉ là tệp font cục bộ, không phải thư viện JavaScript hoặc framework. CSS dùng `@font-face` để nạp; khi không nạp được, trình duyệt dùng Arial/sans-serif. Giấy phép OFL được giữ cùng font.
+
+**24. IntersectionObserver làm gì trong website?**
+
+Theo dõi khi một phần nội dung đi vào màn hình. JavaScript thêm class để CSS đổi opacity và vị trí, rồi dừng theo dõi khối đã hiện. Nếu trình duyệt không hỗ trợ hoặc JS không chạy, nội dung vẫn được hiển thị mặc định.
+
+**25. Vì sao kiểm tra prefers-reduced-motion?**
+
+Một số người nhạy cảm với chuyển động. Cài đặt này giúp website bỏ animation và hiện nội dung ngay, vẫn giữ đủ chức năng.
+
+**26. Làm sao giữ giá và nút của các thẻ sản phẩm cùng hàng?**
+
+Thẻ dùng Flexbox theo cột. Phần thông tin co giãn; hàng giá dùng `margin-top: auto` để đẩy xuống đáy, không phụ thuộc mô tả dài hay ngắn.
+
+**27. Ảnh gà mới có phải ảnh món thật không?**
+
+Không. Đó là ảnh minh họa tạo bằng AI cho bài tập; nguồn được ghi ở `images/SOURCES.md`. Khi kinh doanh thật cần thay bằng ảnh món và khẩu phần thực tế.
+
+**28. Em đã thay đổi những gì trong bản nâng cấp?**
+
+Trang chủ được làm lại bố cục và hình ảnh; 10 trang dùng chung typography, màu, nút và khoảng cách. Menu, FAQ, toast và form được nâng cấp nhưng vẫn giữ lọc món, chi tiết URL, giỏ localStorage và toàn bộ nội dung bắt buộc. Chi tiết nằm ở `REDESIGN.md`.
